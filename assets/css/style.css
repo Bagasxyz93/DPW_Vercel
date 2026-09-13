@@ -7,13 +7,13 @@
 
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    color: #2b2b2b;
-    background-color: #f5f6f8;
+    color: #31554c;
+    background-color: #DEF5E5;
     line-height: 1.5;
 }
 
 a {
-    color: #1d5b8a;
+    color: #527f72;
     text-decoration: none;
 }
 
@@ -23,7 +23,7 @@ a:hover {
 
 /* ===== Header & Navbar (Flexbox) ===== */
 header {
-    background-color: #1d5b8a;
+    background-color: #8EC3B0;
     color: #fff;
     padding: 1rem 1.5rem;
     display: flex;
@@ -59,12 +59,12 @@ section {
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(78, 120, 105, 0.15);
 }
 
 section h2 {
     margin-bottom: 1rem;
-    color: #1d5b8a;
+    color: #4F8F7D;
 }
 
 /* ===== Kartu Statistik (CSS Grid) ===== */
@@ -75,26 +75,33 @@ main section:nth-of-type(2) {
 }
 
 main section:nth-of-type(2) h2 {
-    grid-column: 1/ -1;
+    grid-column: 1 / -1;
 }
 
 main section:nth-of-type(2) article {
-    background-color: #eef4fa;
+    background-color: #BCEAD5;
     border-radius: 8px;
     padding: 1.25rem;
     text-align: center;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+main section:nth-of-type(2) article:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 12px rgba(78, 120, 105, 0.18);
 }
 
 main section:nth-of-type(2) article h3 {
     font-size: 0.95rem;
-    color: #55677a;
+    color: #52756a;
     margin-bottom: 0.5rem;
 }
 
 main section:nth-of-type(2) article p {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #1d5b8a;
+    color: #4F8F7D;
 }
 
 /* ===== Tabel ===== */
@@ -106,20 +113,20 @@ table {
 th, td {
     text-align: left;
     padding: 0.65rem 0.75rem;
-    border-bottom: 1px solid #e2e6ea;
+    border-bottom: 1px solid #d2e9df;
 }
 
 thead {
-    background-color: #1d5b8a;
+    background-color: #8EC3B0;
     color: #fff;
 }
 
 tbody tr:nth-child(even) {
-    background-color: #f7f9fb;
+    background-color: #f3fbf7;
 }
 
 tbody tr:hover {
-    background-color: #eef4fa;
+    background-color: #DEF5E5;
 }
 
 td button {
@@ -132,12 +139,12 @@ td button {
 }
 
 td button:first-of-type {
-    background-color: #f0ad4e;
-    color: #fff;
+    background-color: #E6B84D;
+    color: #4F3B0F;
 }
 
 td button:last-of-type {
-    background-color: #d9534f;
+    background-color: #D95C55;
     color: #fff;
 }
 
@@ -150,7 +157,7 @@ form label {
     display: block;
     margin-bottom: 0.35rem;
     font-weight: 600;
-    color: #444;
+    color: #46665c;
 }
 
 form input,
@@ -158,13 +165,21 @@ form select {
     width: 100%;
     max-width: 400px;
     padding: 0.55rem 0.7rem;
-    border: 1px solid #cdd4da;
+    border: 1px solid #9ED5C5;
     border-radius: 4px;
     font-size: 1rem;
+    background-color: #fff;
+}
+
+form input:focus,
+form select:focus {
+    outline: none;
+    border-color: #8EC3B0;
+    box-shadow: 0 0 0 2px rgba(142, 195, 176, 0.2);
 }
 
 form button[type="submit"] {
-    background-color: #1d5b8a;
+    background-color: #8EC3B0;
     color: #fff;
     border: none;
     padding: 0.6rem 1.5rem;
@@ -174,14 +189,14 @@ form button[type="submit"] {
 }
 
 form button[type="submit"]:hover {
-    background-color: #164869;
+    background-color: #79b19d;
 }
 
 /* ===== Footer ===== */
 footer {
     text-align: center;
     padding: 1.25rem;
-    color: #7a8794;
+    color: #6f9185;
     font-size: 0.9rem;
 }
 
@@ -190,16 +205,35 @@ footer {
     overflow-x: auto;
 }
 
-/* ===== Hamburger Menu (checkbox hack) ===== */
-.nav-toggle {
-    display: none;
-}
-
+/* ===== Hamburger Menu (JS-driven) ===== */
 .nav-toggle-label {
     display: none;
     font-size: 1.6rem;
     color: #fff;
+    background: none;
+    border: none;
     cursor: pointer;
+}
+
+/* ===== Pesan Error Validasi ===== */
+.error {
+    display: block;
+    color: #c76565;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+/* ===== Kolom Pencarian ===== */
+.search-box {
+    margin-bottom: 1rem;
+}
+
+.search-box input {
+    width: 100%;
+    max-width: 320px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #9ED5C5;
+    border-radius: 4px;
 }
 
 /* ===== Responsive Breakpoints ===== */
@@ -228,7 +262,7 @@ footer {
         margin-top: 1rem;
     }
 
-    .nav-toggle:checked ~ nav {
+    header nav.nav-open {
         display: block;
     }
 

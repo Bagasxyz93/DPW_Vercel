@@ -9,8 +9,7 @@
 <body>
     <header>
         <h1>SIMPUS-Mini</h1>
-        <input type="checkbox" id="nav-toggle" class="nav-toggle">
-        <label for="nav-toggle" class="nav-toggle-label">&#9776;</label>
+        <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Menu">&#9776;</button>
         <nav>
             <ul>
                 <li><a href="../index.html">Beranda</a></li>
@@ -22,9 +21,14 @@
         </nav>
     </header>
 
-    <main>
+     <main>
         <section>
             <h2>Daftar Anggota</h2>
+            <div class="search-box">
+                <label for="search-input">Cari Nama Anggota</label>
+                <input type="text" id="search-input" placeholder="Ketik nama anggota...">
+            </div>
+            <p id="loading-indicator" style="display:none;">Memuat data...</p>
             <div class="table-responsive">
             <table>
                 <thead>
@@ -37,26 +41,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>A001</td>
-                        <td>Siti Aminah</td>
-                        <td>Malang</td>
-                        <td>0812xxxx</td>
-                        <td>
-                            <button type="button">Edit</button>
-                            <button type="button">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A002</td>
-                        <td>Budi Santoso</td>
-                        <td>Batu</td>
-                        <td>0813xxxx</td>
-                        <td>
-                            <button type="button">Edit</button>
-                            <button type="button">Hapus</button>
-                        </td>
-                    </tr>
+                    <!-- Baris diisi dinamis oleh assets/js/anggota.js via fetch('../data/anggota.json') -->
                 </tbody>
             </table>
             </div>
@@ -64,7 +49,9 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 SIMPUS-Mini &mdash; Jobsheet 3</p>
+        <p>&copy; 2026 SIMPUS-Mini &mdash; Jobsheet 6</p>
     </footer>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/anggota.js"></script>
 </body>
 </html>
