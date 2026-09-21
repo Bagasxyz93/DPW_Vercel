@@ -2,14 +2,10 @@ FROM dunglas/frankenphp:php8.3-bookworm
 
 WORKDIR /app
 
-# Install PostgreSQL extension untuk PDO
 RUN install-php-extensions pdo_pgsql
 
-# Salin seluruh project PHP
 COPY . /app
 
-# Vercel memberikan PORT melalui environment variable
 ENV SERVER_NAME=:80
 
-# Jalankan FrankenPHP
-CMD ["frankenphp", "php-server", "--listen", ":80", "--root", "/app"]
+CMD ["sh", "-c", "frankenphp php-server --listen :${PORT:-80} --root /app"]
