@@ -1,440 +1,211 @@
 <?php
 
-$page_title = "Dashboard";
-
-include __DIR__ . '/includes/header.php';
-require __DIR__ . '/includes/koneksi.php';
-
-
-// =========================================================
-// STATISTIK DASHBOARD
-// =========================================================
-
-// Total siswa
-$totalSiswa = $pdo
-    ->query("SELECT COUNT(*) FROM siswa")
-    ->fetchColumn();
-
-
-// Total guru
-$totalGuru = $pdo
-    ->query("SELECT COUNT(*) FROM guru")
-    ->fetchColumn();
-
-
-// Total program
-$totalProgram = $pdo
-    ->query("SELECT COUNT(*) FROM program")
-    ->fetchColumn();
-
-
-// Total siswa yang hadir hari ini
-$hadirHariIni = $pdo
-    ->query("
-        SELECT COUNT(*)
-        FROM absensi
-        WHERE tanggal = CURRENT_DATE
-        AND status = 'Hadir'
-    ")
-    ->fetchColumn();
-
-
-// =========================================================
-// ABSENSI HARI INI
-// =========================================================
-
-$absensiHariIni = $pdo
-    ->query("
-        SELECT
-            absensi.waktu_absen,
-            absensi.status,
-            siswa.nis,
-            siswa.nama,
-            program.nama_program
-        FROM absensi
-        INNER JOIN siswa
-            ON absensi.siswa_id = siswa.id
-        LEFT JOIN program
-            ON siswa.program_id = program.id
-        WHERE absensi.tanggal = CURRENT_DATE
-        ORDER BY absensi.waktu_absen DESC
-    ")
-    ->fetchAll(PDO::FETCH_ASSOC);
-
-
-// =========================================================
-// PROGRAM
-// =========================================================
-
-$daftarProgram = $pdo
-    ->query("
-        SELECT
-            program.id,
-            program.nama_program,
-            program.deskripsi,
-            COUNT(siswa.id) AS jumlah_siswa
-        FROM program
-        LEFT JOIN siswa
-            ON siswa.program_id = program.id
-        GROUP BY
-            program.id,
-            program.nama_program,
-            program.deskripsi
-        ORDER BY program.id DESC
-        LIMIT 5
-    ")
-    ->fetchAll(PDO::FETCH_ASSOC);
+$jobsheets = [
+    [
+        'nomor' => '01',
+        'judul' => 'Jobsheet 1',
+        'deskripsi' => 'Hasil pengerjaan Jobsheet 1.',
+        'link' => 'Jobsheet1/index.html'
+    ],
+    [
+        'nomor' => '02',
+        'judul' => 'Jobsheet 2',
+        'deskripsi' => 'Hasil pengerjaan Jobsheet 2.',
+        'link' => 'Jobsheet2/index.html'
+    ],
+    [
+        'nomor' => '03',
+        'judul' => 'Jobsheet 3',
+        'deskripsi' => 'Hasil pengerjaan Jobsheet 3.',
+        'link' => 'Jobsheet3/index.html'
+    ],
+    [
+        'nomor' => '04',
+        'judul' => 'Jobsheet 4',
+        'deskripsi' => 'Hasil pengerjaan Jobsheet 4.',
+        'link' => 'Jobsheet4/index.html'
+    ],
+    [
+        'nomor' => '05',
+        'judul' => 'Jobsheet 5',
+        'deskripsi' => 'Hasil pengerjaan Jobsheet 5.',
+        'link' => 'Jobsheet5/index.html'
+    ],
+    [
+        'nomor' => '06',
+        'judul' => 'Jobsheet 6',
+        'deskripsi' => 'Hasil pengerjaan Jobsheet 6.',
+        'link' => 'Jobsheet6/index.html'
+    ],
+    [
+        'nomor' => '07',
+        'judul' => 'Jobsheet 7',
+        'deskripsi' => 'Hasil pengerjaan Jobsheet 7.',
+        'link' => 'Jobsheet7/index.php'
+    ],
+    [
+        'nomor' => '08',
+        'judul' => 'Jobsheet 8',
+        'deskripsi' => 'Hasil pengerjaan Jobsheet 8.',
+        'link' => 'Jobsheet8/index.php'
+    ]
+];
 
 ?>
 
-<!-- =====================================================
-     DASHBOARD
-====================================================== -->
+<!DOCTYPE html>
+<html lang="id">
 
-<div class="page-header">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <div>
-        <h2>Dashboard</h2>
+    <title>DPW | Kumpulan Jobsheet</title>
 
-        <p>
-            Selamat datang di Sistem Informasi Absensi.
-        </p>
-    </div>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
 
-</div>
+<body>
+
+<div class="page">
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                DPW
+            </div>
+
+            <div>
+                <h1>DPW Project</h1>
+                <span>Desain & Pemrograman Web</span>
+            </div>
+
+        </div>
+
+        <div class="header-info">
+            Semester 3
+        </div>
+
+    </header>
 
 
-<!-- =====================================================
-     STATISTIK
-====================================================== -->
+    <!-- CONTENT -->
+    <main class="container">
 
-<div class="stats-grid">
+        <!-- HERO -->
+        <section class="hero">
 
-    <!-- Total Siswa -->
+            <span class="hero-label">
+                DESAIN & PEMROGRAMAN WEB
+            </span>
 
-    <div class="stat-card">
-
-        <div class="stat-info">
-
-            <h3>Total Siswa</h3>
+            <h2>
+                Kumpulan Jobsheet
+            </h2>
 
             <p>
-                <?php echo $totalSiswa; ?>
+                Dokumentasi dan hasil pengerjaan Jobsheet
+                Desain & Pemrograman Web dari Jobsheet 1
+                hingga Jobsheet 8.
             </p>
 
-        </div>
+        </section>
 
-        <div class="stat-icon">
-            👨‍🎓
-        </div>
 
-    </div>
+        <!-- DAFTAR JOBSHEET -->
+        <section>
 
+            <div class="section-title">
 
-    <!-- Total Guru -->
+                <div>
+                    <h3>
+                        Daftar Jobsheet
+                    </h3>
 
-    <div class="stat-card">
-
-        <div class="stat-info">
-
-            <h3>Total Guru</h3>
-
-            <p>
-                <?php echo $totalGuru; ?>
-            </p>
-
-        </div>
-
-        <div class="stat-icon">
-            👨‍🏫
-        </div>
-
-    </div>
-
-
-    <!-- Total Program -->
-
-    <div class="stat-card">
-
-        <div class="stat-info">
-
-            <h3>Total Program</h3>
-
-            <p>
-                <?php echo $totalProgram; ?>
-            </p>
-
-        </div>
-
-        <div class="stat-icon">
-            ▣
-        </div>
-
-    </div>
-
-
-    <!-- Hadir Hari Ini -->
-
-    <div class="stat-card">
-
-        <div class="stat-info">
-
-            <h3>Hadir Hari Ini</h3>
-
-            <p>
-                <?php echo $hadirHariIni; ?>
-            </p>
-
-        </div>
-
-        <div class="stat-icon">
-            ✓
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     DASHBOARD CONTENT
-====================================================== -->
-
-<div class="dashboard-grid">
-
-
-    <!-- =================================================
-         ABSENSI HARI INI
-    ================================================== -->
-
-    <div class="card">
-
-        <div class="card-header">
-
-            <h3>Absensi Hari Ini</h3>
-
-            <a href="absensi/list.php">
-                Lihat Semua
-            </a>
-
-        </div>
-
-
-        <div class="table-responsive">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>No</th>
-
-                        <th>Waktu</th>
-
-                        <th>NIS</th>
-
-                        <th>Nama Siswa</th>
-
-                        <th>Program</th>
-
-                        <th>Status</th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-                    <?php if (empty($absensiHariIni)): ?>
-
-                        <tr>
-
-                            <td colspan="6">
-                                Belum ada absensi hari ini.
-                            </td>
-
-                        </tr>
-
-                    <?php else: ?>
-
-                        <?php foreach ($absensiHariIni as $index => $absensi): ?>
-
-                            <tr>
-
-                                <td>
-                                    <?php echo $index + 1; ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo $absensi['waktu_absen']
-                                        ? htmlspecialchars($absensi['waktu_absen'])
-                                        : '-';
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo htmlspecialchars(
-                                        $absensi['nis']
-                                    );
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo htmlspecialchars(
-                                        $absensi['nama']
-                                    );
-                                    ?>
-                                </td>
-
-                                <td>
-                                    <?php
-                                    echo htmlspecialchars(
-                                        $absensi['nama_program'] ?? '-'
-                                    );
-                                    ?>
-                                </td>
-
-                                <td>
-
-                                    <?php
-
-                                    $statusClass = match (
-                                        $absensi['status']
-                                    ) {
-                                        'Hadir' => 'badge-hadir',
-                                        'Izin' => 'badge-izin',
-                                        'Sakit' => 'badge-sakit',
-                                        'Alpha' => 'badge-alpha',
-                                        default => ''
-                                    };
-
-                                    ?>
-
-                                    <span
-                                        class="badge <?php echo $statusClass; ?>"
-                                    >
-                                        <?php
-                                        echo htmlspecialchars(
-                                            $absensi['status']
-                                        );
-                                        ?>
-                                    </span>
-
-                                </td>
-
-                            </tr>
-
-                        <?php endforeach; ?>
-
-                    <?php endif; ?>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-
-    <!-- =================================================
-         PROGRAM
-    ================================================== -->
-
-    <div class="card">
-
-        <div class="card-header">
-
-            <h3>Program</h3>
-
-            <a href="program/list.php">
-                Lihat Semua
-            </a>
-
-        </div>
-
-
-        <?php if (empty($daftarProgram)): ?>
-
-            <p>
-                Belum ada program.
-            </p>
-
-        <?php else: ?>
-
-            <?php foreach ($daftarProgram as $program): ?>
-
-                <div
-                    style="
-                        padding: 14px 0;
-                        border-bottom: 1px solid #edf0f3;
-                    "
-                >
-
-                    <div
-                        style="
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-                            gap: 10px;
-                        "
-                    >
-
-                        <strong>
-                            <?php
-                            echo htmlspecialchars(
-                                $program['nama_program']
-                            );
-                            ?>
-                        </strong>
-
-                        <span
-                            style="
-                                font-size: 0.75rem;
-                                color: #8995a3;
-                            "
-                        >
-                            <?php
-                            echo $program['jumlah_siswa'];
-                            ?>
-                            siswa
-                        </span>
-
-                    </div>
-
-
-                    <?php if (!empty($program['deskripsi'])): ?>
-
-                        <p
-                            style="
-                                margin-top: 5px;
-                                font-size: 0.78rem;
-                                color: #8995a3;
-                            "
-                        >
-                            <?php
-                            echo htmlspecialchars(
-                                $program['deskripsi']
-                            );
-                            ?>
-                        </p>
-
-                    <?php endif; ?>
-
+                    <p>
+                        Pilih jobsheet untuk melihat hasil pengerjaan.
+                    </p>
                 </div>
 
-            <?php endforeach; ?>
+                <span class="total">
+                    <?php echo count($jobsheets); ?> Jobsheet
+                </span>
 
-        <?php endif; ?>
+            </div>
 
-    </div>
+
+            <div class="jobsheet-grid">
+
+                <?php foreach ($jobsheets as $jobsheet): ?>
+
+                    <article class="jobsheet-card">
+
+                        <div class="card-number">
+                            <?php echo $jobsheet['nomor']; ?>
+                        </div>
+
+
+                        <div class="card-content">
+
+                            <span class="card-label">
+                                JOBSHEET
+                                <?php echo $jobsheet['nomor']; ?>
+                            </span>
+
+
+                            <h4>
+                                <?php
+                                echo htmlspecialchars($jobsheet['judul']);
+                                ?>
+                            </h4>
+
+
+                            <p>
+                                <?php
+                                echo htmlspecialchars($jobsheet['deskripsi']);
+                                ?>
+                            </p>
+
+
+                            <a
+                                href="<?php echo htmlspecialchars($jobsheet['link']); ?>"
+                                class="btn-open"
+                            >
+                                Buka Jobsheet
+                                <span>→</span>
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                <?php endforeach; ?>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <p>
+            &copy; 2026 Desain & Pemrograman Web
+        </p>
+
+        <p>
+            Politeknik Negeri Malang
+        </p>
+
+    </footer>
 
 </div>
 
+</body>
 
-<?php include __DIR__ . '/includes/footer.php'; ?>
+</html>
