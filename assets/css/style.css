@@ -93,7 +93,7 @@ a {
 
 
 /* =========================
-   HERO
+   HERO & BIODATA
 ========================= */
 
 .hero {
@@ -128,6 +128,45 @@ a {
     line-height: 1.7;
 
     color: #6b7280;
+}
+
+/* BIODATA CARD */
+.bio-card {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.bio-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.bio-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.bio-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.bio-divider {
+    width: 1px;
+    height: 28px;
+    background-color: #e5e7eb;
 }
 
 
@@ -437,6 +476,17 @@ a {
 
     .hero h2 {
         font-size: 30px;
+    }
+
+    .bio-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .bio-divider {
+        width: 100%;
+        height: 1px;
     }
 
     .jobsheet-grid {

@@ -112,6 +112,24 @@ $jobsheets = [
                 hingga Jobsheet 8.
             </p>
 
+            <!-- BIODATA CARD -->
+            <div class="bio-card">
+                <div class="bio-item">
+                    <span class="bio-label">Nama</span>
+                    <span class="bio-value">M. Bagas Fathurrahman</span>
+                </div>
+                <div class="bio-divider"></div>
+                <div class="bio-item">
+                    <span class="bio-label">Kelas</span>
+                    <span class="bio-value">TI-2D</span>
+                </div>
+                <div class="bio-divider"></div>
+                <div class="bio-item">
+                    <span class="bio-label">NIM / Absen</span>
+                    <span class="bio-value">254107020032 (Absen 17)</span>
+                </div>
+            </div>
+
         </section>
 
 
