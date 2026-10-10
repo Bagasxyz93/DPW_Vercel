@@ -6,239 +6,303 @@
 }
 
 body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    color: #2b2b2b;
-    background-color: #f5f6f8;
-    line-height: 1.5;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: #f3f4f6;
+    background-color: #0f172a;
+    line-height: 1.6;
 }
 
 a {
-    color: #1d5b8a;
+    color: #38bdf8;
     text-decoration: none;
 }
 
-a:hover {
-    text-decoration: underline;
-}
-
-/* ===== Header & Navbar (Flexbox) ===== */
+/* ===== Modern Dark Navbar (Responsive Glassmorphism) ===== */
 header {
-    background-color: #1d5b8a;
-    color: #fff;
-    padding: 1rem 1.5rem;
+    background-color: rgba(30, 41, 59, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #334155;
+    padding: 1rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 header h1 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #f8fafc;
 }
 
-header nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1.25rem;
+header h1 span {
+    color: #38bdf8;
 }
 
-header nav a {
-    color: #fff;
-    font-weight: 500;
-}
-
-/* ===== Main Layout ===== */
-main {
-    max-width: 1000px;
-    margin: 2rem auto;
-    padding: 0 1.5rem;
-}
-
-section {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-section h2 {
-    margin-bottom: 1rem;
-    color: #1d5b8a;
-}
-
-/* ===== Kartu Statistik (CSS Grid) ===== */
-main section:nth-of-type(2) {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-}
-
-main section:nth-of-type(2) article {
-    background-color: #eef4fa;
-    border-radius: 8px;
-    padding: 1.25rem;
-    text-align: center;
-}
-
-main section:nth-of-type(2) article h3 {
-    font-size: 0.95rem;
-    color: #55677a;
-    margin-bottom: 0.5rem;
-}
-
-main section:nth-of-type(2) article p {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #1d5b8a;
-}
-
-/* ===== Tabel ===== */
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    text-align: left;
-    padding: 0.65rem 0.75rem;
-    border-bottom: 1px solid #e2e6ea;
-}
-
-thead {
-    background-color: #1d5b8a;
-    color: #fff;
-}
-
-tbody tr:nth-child(even) {
-    background-color: #f7f9fb;
-}
-
-tbody tr:hover {
-    background-color: #eef4fa;
-}
-
-td button {
-    padding: 0.35rem 0.7rem;
-    margin-right: 0.35rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.85rem;
-}
-
-td button:first-of-type {
-    background-color: #f0ad4e;
-    color: #fff;
-}
-
-td button:last-of-type {
-    background-color: #d9534f;
-    color: #fff;
-}
-
-/* ===== Form ===== */
-form p {
-    margin-bottom: 1rem;
-}
-
-form label {
-    display: block;
-    margin-bottom: 0.35rem;
-    font-weight: 600;
-    color: #444;
-}
-
-form input,
-form select {
-    width: 100%;
-    max-width: 400px;
-    padding: 0.55rem 0.7rem;
-    border: 1px solid #cdd4da;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-form button[type="submit"] {
-    background-color: #1d5b8a;
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1.5rem;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-form button[type="submit"]:hover {
-    background-color: #164869;
-}
-
-/* ===== Footer ===== */
-footer {
-    text-align: center;
-    padding: 1.25rem;
-    color: #7a8794;
-    font-size: 0.9rem;
-}
-
-/* ===== Tabel Responsif ===== */
-.table-responsive {
-    overflow-x: auto;
-}
-
-/* ===== Hamburger Menu (checkbox hack) ===== */
+/* Checkbox Toggle untuk Hamburger Menu */
 .nav-toggle {
     display: none;
 }
 
 .nav-toggle-label {
     display: none;
-    font-size: 1.6rem;
-    color: #fff;
+    font-size: 1.5rem;
+    color: #f8fafc;
+    cursor: pointer;
+    user-select: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    background-color: #1e293b;
+    border: 1px solid #334155;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+    background-color: #0f172a;
+    padding: 6px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+}
+
+header nav a {
+    color: #94a3b8;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    display: block;
+}
+
+header nav a:hover,
+header nav a.active {
+    color: #ffffff;
+    background-color: #0284c7;
+}
+
+/* ===== Main Layout ===== */
+main {
+    max-width: 1000px;
+    margin: 2.5rem auto;
+    padding: 0 1.5rem;
+}
+
+section {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 1.75rem;
+    margin-bottom: 1.75rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+section h2 {
+    margin-bottom: 0.75rem;
+    color: #f8fafc;
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+section p {
+    color: #94a3b8;
+}
+
+/* ===== Grid Card Modern Dark ===== */
+main section:nth-of-type(2) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+
+main section:nth-of-type(2) h2 {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+}
+
+main section:nth-of-type(2) article {
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+}
+
+main section:nth-of-type(2) article::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #38bdf8;
+}
+
+main section:nth-of-type(2) article h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+}
+
+main section:nth-of-type(2) article p {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #f8fafc;
+}
+
+/* ===== Tabel Modern Dark ===== */
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.75rem;
+}
+
+th, td {
+    text-align: left;
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid #334155;
+    font-size: 0.9rem;
+}
+
+thead th {
+    background-color: #0f172a;
+    color: #38bdf8;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+tbody tr:hover {
+    background-color: rgba(51, 65, 85, 0.5);
+}
+
+td button {
+    padding: 0.45rem 0.85rem;
+    margin-right: 0.35rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+}
+
+td button:hover {
+    opacity: 0.85;
+}
+
+td button:first-of-type {
+    background-color: #f59e0b;
+    color: #0f172a;
+}
+
+td button:last-of-type {
+    background-color: #ef4444;
+    color: #ffffff;
+}
+
+/* ===== Form Dark ===== */
+form {
+    margin-top: 0.75rem;
+}
+
+form p {
+    margin-bottom: 1.25rem;
+}
+
+form label {
+    display: inline-block;
+    margin-bottom: 0.4rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #cbd5e1;
+}
+
+form input,
+form select {
+    width: 100%;
+    max-width: 450px;
+    padding: 0.7rem 0.9rem;
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #f8fafc;
+}
+
+form input:focus,
+form select:focus {
+    outline: none;
+    border-color: #38bdf8;
+}
+
+form button[type="submit"] {
+    background-color: #0284c7;
+    color: #ffffff;
+    border: none;
+    padding: 0.7rem 1.75rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
 }
 
-/* ===== Responsive Breakpoints ===== */
-
-/* Tablet ke bawah */
-@media (max-width: 768px) {
-    main section:nth-of-type(2) {
-        grid-template-columns: repeat(2, 1fr);
-    }
+form button[type="submit"]:hover {
+    background-color: #0369a1;
 }
 
-/* Mobile */
-@media (max-width: 480px) {
-    header {
-        position: relative;
-    }
+/* ===== Footer ===== */
+footer {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    color: #64748b;
+    font-size: 0.85rem;
+}
 
+/* ===== Responsive Breakpoint (Jobsheet 3) ===== */
+@media (max-width: 768px) {
     .nav-toggle-label {
         display: block;
     }
 
     header nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #1e293b;
+        border-bottom: 1px solid #334155;
+        padding: 1rem 1.5rem;
         display: none;
-        width: 100%;
-        order: 3;
-        margin-top: 1rem;
-    }
-
-    .nav-toggle:checked ~ nav {
-        display: block;
     }
 
     header nav ul {
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 0.5rem;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+    }
+
+    /* Mengaktifkan dropdown menu saat tombol hamburger di-check */
+    .nav-toggle:checked ~ nav {
+        display: block;
     }
 
     main section:nth-of-type(2) {
         grid-template-columns: 1fr;
-    }
-
-    form input,
-    form select {
-        max-width: 100%;
     }
 }

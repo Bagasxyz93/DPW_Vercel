@@ -8,18 +8,18 @@
 </head>
 <body>
     <header>
-        <h1>SIMPUS-Mini</h1>
-        <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Menu">&#9776;</button>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Beranda</a></li>
-                <li><a href="list.html">Daftar Buku</a></li>
-                <li><a href="tambah.html">Tambah Buku</a></li>
-                <li><a href="../anggota/list.html">Daftar Anggota</a></li>
-                <li><a href="../anggota/tambah.html">Tambah Anggota</a></li>
-            </ul>
-        </nav>
-    </header>
+    <h1><a href="../index.html">SIMPUS<span>-Mini</span></a></h1>
+    <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Menu">&#9776;</button>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Beranda</a></li>
+            <li><a href="list.html" class="active">Daftar Buku</a></li>
+            <li><a href="tambah.html">Tambah Buku</a></li>
+            <li><a href="../anggota/list.html">Daftar Anggota</a></li>
+            <li><a href="../anggota/tambah.html">Tambah Anggota</a></li>
+        </ul>
+    </nav>
+</header>
 
     <main>
         <section>
@@ -30,20 +30,20 @@
             </div>
             <p id="loading-indicator" style="display:none;">Memuat data...</p>
             <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Judul</th>
-                        <th>Pengarang</th>
-                        <th>Tahun</th>
-                        <th>Stok</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Baris diisi dinamis oleh assets/js/buku.js via fetch('../data/buku.json') -->
-                </tbody>
-            </table>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Judul</th>
+                            <th>Pengarang</th>
+                            <th>Tahun</th>
+                            <th>Stok</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Baris diisi dinamis oleh assets/js/buku.js via fetch('../data/buku.json') -->
+                    </tbody>
+                </table>
             </div>
         </section>
     </main>
