@@ -2,26 +2,33 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Anggota | SIMPUS-Mini</title>
     <link rel="stylesheet" href="../assets/css/style.css">
-    <title>SIMPUS-Mini | Daftar Anggota</title>
 </head>
 <body>
+
     <header>
-        <h1><a href="../index.html">SIMPUS<span>-Mini</span></a></h1>
+        <div class="logo">SIMPUS-Mini</div>
+
         <nav>
-            <ul>
-                <li><a href="../index.html">Beranda</a></li>
-                <li><a href="../buku/list.html">Daftar Buku</a></li>
-                <li><a href="../buku/tambah.html">Tambah Buku</a></li>
-                <li><a href="list.html" class="active">Daftar Anggota</a></li>
-                <li><a href="tambah.html">Tambah Anggota</a></li>
-            </ul>
+            <a href="../index.html">Beranda</a>
+            <a href="../buku/list.html">Daftar Buku</a>
+            <a href="../buku/tambah.html">Tambah Buku</a>
+            <a href="list.html" class="active">Daftar Anggota</a>
+            <a href="tambah.html">Tambah Anggota</a>
         </nav>
     </header>
 
     <main>
-        <section>
-            <h2>Daftar Anggota</h2>
+        <h1>Daftar Anggota</h1>
+
+        <section class="table-panel">
+            <div class="table-heading">
+                <h2>Semua Data Buku</h2>
+                <a href="tambah.html" class="btn-tambah">Tambah Buku</a>
+            </div>
+
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -31,27 +38,28 @@
                             <th>Alamat</th>
                             <th>No. HP</th>
                             <th>Tanggal Bergabung</th>
-                            <th>Aksi</th>                
+                            <th>Aksi</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <tr>
-                            <td>A001</td>
-                            <td>Siti Aminah</td>
+                            <td>AG001</td>
+                            <td>Andi Saputra</td>
                             <td>Malang</td>
-                            <td>0812xxxx</td>
-                            <td>25 Mei 2026</td>
+                            <td>081234567890</td>
+                            <td>2026-01-10</td>
                             <td>
                                 <button type="button">Edit</button>
                                 <button type="button">Hapus</button>
                             </td>
                         </tr>
                         <tr>
-                            <td>A002</td>
-                            <td>Budi Santoso</td>
-                            <td>Batu</td>
-                            <td>0813xxxx</td>
-                            <td>1 Juni 2026</td>
+                            <td>AG002</td>
+                            <td>Siti Aminah</td>
+                            <td>Blitar</td>
+                            <td>081298765432</td>
+                            <td>2026-01-15</td>
                             <td>
                                 <button type="button">Edit</button>
                                 <button type="button">Hapus</button>
@@ -64,7 +72,8 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 SIMPUS-Mini &mdash; Jobsheet 2</p>
+        SIMPUS-Mini | Jobsheet 2
     </footer>
+
 </body>
 </html>

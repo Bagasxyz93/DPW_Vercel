@@ -8,7 +8,7 @@
 body {
     font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
     color: #f3f4f6;
-    background-color: #0f172a; /* Dark background */
+    background-color: #0f172a;
     line-height: 1.6;
 }
 
@@ -17,25 +17,28 @@ a {
     text-decoration: none;
 }
 
-/* ===== Modern Dark Navbar ===== */
+/* ===== Sidebar Kiri ===== */
 header {
-    background-color: rgba(30, 41, 59, 0.8);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid #334155;
-    padding: 1rem 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
+    width: 240px;
+    height: 100vh;
+    background-color: #1e293b;
+    border-right: 1px solid #334155;
+    padding: 1.5rem 1rem;
+    position: fixed;
     top: 0;
-    z-index: 100;
+    left: 0;
+}
+
+header h1 {
+    padding: 0 0.5rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #334155;
 }
 
 header h1 a {
     color: #f8fafc;
     font-size: 1.3rem;
     font-weight: 800;
-    letter-spacing: 0.5px;
 }
 
 header h1 a span {
@@ -44,21 +47,20 @@ header h1 a span {
 
 header nav ul {
     list-style: none;
-    display: flex;
-    gap: 0.5rem;
-    background-color: #0f172a;
-    padding: 6px;
-    border-radius: 12px;
-    border: 1px solid #334155;
+}
+
+header nav li {
+    margin-bottom: 0.5rem;
 }
 
 header nav a {
+    display: block;
     color: #94a3b8;
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1rem;
     border-radius: 8px;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
 header nav a:hover,
@@ -67,20 +69,19 @@ header nav a.active {
     background-color: #0284c7;
 }
 
-/* ===== Main Layout ===== */
+/* ===== Konten Utama ===== */
 main {
-    max-width: 1000px;
-    margin: 2.5rem auto;
-    padding: 0 1.5rem;
+    margin-left: 240px;
+    padding: 2rem;
 }
 
 section {
     background-color: #1e293b;
     border: 1px solid #334155;
-    border-radius: 16px;
-    padding: 1.75rem;
-    margin-bottom: 1.75rem;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 section h2 {
@@ -94,106 +95,159 @@ section p {
     color: #94a3b8;
 }
 
-/* ===== Grid Card Modern Dark ===== */
+/* ===== Ringkasan Dashboard ===== */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
+    gap: 1rem;
     margin-top: 1.25rem;
 }
 
 .stats-card {
-    background: linear-gradient(145deg, #1e293b, #0f172a);
+    background-color: #0f172a;
     border: 1px solid #334155;
-    border-radius: 14px;
-    padding: 1.5rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.stats-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: #38bdf8;
+    border-left: 4px solid #38bdf8;
+    border-radius: 8px;
+    padding: 1.25rem;
 }
 
 .stats-card h3 {
     font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #64748b;
+    letter-spacing: 0.5px;
+    color: #94a3b8;
     margin-bottom: 0.5rem;
 }
 
 .stats-card p {
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 800;
     color: #f8fafc;
 }
 
-/* ===== Tabel Modern Dark ===== */
-.table-responsive {
-    overflow-x: auto;
+/* ===== Header Tabel dan Tombol Tambah ===== */
+.table-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
+.table-heading h2 {
+    margin-bottom: 0;
+}
+
+.btn-tambah {
+    display: inline-block;
+    padding: 0.65rem 1.1rem;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 7px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.btn-tambah:hover {
+    background-color: #1d4ed8;
+}
+
+/* ===== Tabel Dark Admin ===== */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #303034;
+    border-radius: 10px;
+}
+
+/* Tabel utama */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 0.75rem;
+    margin-top: 0;
+    background-color: #1b1b1e;
 }
 
-th, td {
-    text-align: left;
-    padding: 0.9rem 1rem;
-    border-bottom: 1px solid #334155;
-    font-size: 0.9rem;
+/* Header tabel */
+thead {
+    background-color: #1b1b1e;
 }
 
 thead th {
-    background-color: #0f172a;
-    color: #38bdf8;
+    text-align: left;
+    padding: 1.1rem 1.25rem;
+    color: #f4f4f5;
+    font-size: 0.8rem;
     font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    letter-spacing: 0.5px;
+    text-transform: none;
+    letter-spacing: 0;
+    white-space: nowrap;
+    border-bottom: 1px solid #303034;
+}
+
+/* Isi tabel */
+tbody td {
+    text-align: left;
+    padding: 1.25rem;
+    color: #c4c4cc;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #303034;
+    vertical-align: middle;
+}
+
+/* Baris terakhir tanpa garis bawah */
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Efek hover baris */
+tbody tr {
+    transition: background-color 0.2s ease;
 }
 
 tbody tr:hover {
-    background-color: rgba(51, 65, 85, 0.5);
+    background-color: #262629;
 }
 
+
+/* ===== Tombol Aksi Tabel ===== */
 td button {
-    padding: 0.45rem 0.85rem;
-    margin-right: 0.35rem;
+    padding: 0.45rem 0.75rem;
+    margin-right: 0.3rem;
     border: none;
-    border-radius: 6px;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-family: inherit;
+    font-size: 0.78rem;
     font-weight: 600;
-    transition: opacity 0.2s ease;
+    white-space: nowrap;
 }
 
-td button:hover {
-    opacity: 0.85;
-}
-
-td button:first-of-type {
-    background-color: #f59e0b;
-    color: #0f172a;
-}
-
-td button:last-of-type {
-    background-color: #ef4444;
+td button.btn-edit {
+    background-color: #2563eb;
     color: #ffffff;
 }
 
-/* ===== Form Dark ===== */
+td button.btn-edit:hover {
+    background-color: #1d4ed8;
+}
+
+td button.btn-hapus {
+    background-color: #dc2626;
+    color: #ffffff;
+}
+
+td button.btn-hapus:hover {
+    background-color: #b91c1c;
+}
+
+
+/* ===== Form ===== */
 form {
-    margin-top: 0.75rem;
+    margin-top: 1rem;
 }
 
 .form-group {
@@ -243,8 +297,9 @@ form button[type="submit"]:hover {
 
 /* ===== Footer ===== */
 footer {
+    margin-left: 240px;
     text-align: center;
-    padding: 2rem 1.5rem;
+    padding: 1.5rem;
     color: #64748b;
     font-size: 0.85rem;
 }

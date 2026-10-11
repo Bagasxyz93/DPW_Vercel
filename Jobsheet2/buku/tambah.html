@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -8,6 +9,7 @@
 <body>
     <header>
         <h1><a href="../index.html">SIMPUS<span>-Mini</span></a></h1>
+
         <nav>
             <ul>
                 <li><a href="../index.html">Beranda</a></li>
@@ -22,27 +24,35 @@
     <main>
         <section>
             <h2>Tambah Buku</h2>
+
             <form>
                 <div class="form-group">
                     <label for="judul">Judul</label>
                     <input type="text" id="judul" name="judul" required>
                 </div>
+
                 <div class="form-group">
                     <label for="pengarang">Pengarang</label>
                     <input type="text" id="pengarang" name="pengarang" required>
                 </div>
+
                 <div class="form-group">
                     <label for="tahun">Tahun Terbit</label>
-                    <input type="number" id="tahun" name="tahun" min="1900" max="2026" required>
+                    <input type="number" id="tahun" name="tahun"
+                           min="1900" max="2026" required>
                 </div>
+
                 <div class="form-group">
                     <label for="isbn">ISBN</label>
                     <input type="text" id="isbn" name="isbn">
                 </div>
+
                 <div class="form-group">
                     <label for="stok">Stok</label>
-                    <input type="number" id="stok" name="stok" min="0" required>
+                    <input type="number" id="stok" name="stok"
+                           min="0" required>
                 </div>
+
                 <div class="form-group">
                     <label for="kategori">Kategori</label>
                     <select id="kategori" name="kategori">
@@ -51,6 +61,7 @@
                         <option value="referensi">Referensi</option>
                     </select>
                 </div>
+
                 <div>
                     <button type="submit">Simpan</button>
                 </div>

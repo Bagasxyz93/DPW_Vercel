@@ -9,8 +9,10 @@
 <body>
     <header>
         <h1><a href="../index.html">SIMPUS<span>-Mini</span></a></h1>
+
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
         <label for="nav-toggle" class="nav-toggle-label">&#9776;</label>
+
         <nav>
             <ul>
                 <li><a href="../index.html">Beranda</a></li>
@@ -25,35 +27,44 @@
     <main>
         <section>
             <h2>Tambah Buku</h2>
+
             <form>
                 <p>
-                    <label for="judul">Judul</label><br>
+                    <label for="judul">Judul</label>
                     <input type="text" id="judul" name="judul" required>
                 </p>
+
                 <p>
-                    <label for="pengarang">Pengarang</label><br>
+                    <label for="pengarang">Pengarang</label>
                     <input type="text" id="pengarang" name="pengarang" required>
                 </p>
+
                 <p>
-                    <label for="tahun">Tahun Terbit</label><br>
-                    <input type="number" id="tahun" name="tahun" min="1900" max="2026" required>
+                    <label for="tahun">Tahun Terbit</label>
+                    <input type="number" id="tahun" name="tahun"
+                           min="1900" max="2026" required>
                 </p>
+
                 <p>
-                    <label for="isbn">ISBN</label><br>
+                    <label for="isbn">ISBN</label>
                     <input type="text" id="isbn" name="isbn">
                 </p>
+
                 <p>
-                    <label for="stok">Stok</label><br>
-                    <input type="number" id="stok" name="stok" min="0" required>
+                    <label for="stok">Stok</label>
+                    <input type="number" id="stok" name="stok"
+                           min="0" required>
                 </p>
+
                 <p>
-                    <label for="kategori">Kategori</label><br>
+                    <label for="kategori">Kategori</label>
                     <select id="kategori" name="kategori">
                         <option value="fiksi">Fiksi</option>
                         <option value="non-fiksi">Non-Fiksi</option>
                         <option value="referensi">Referensi</option>
                     </select>
                 </p>
+
                 <p>
                     <button type="submit">Simpan</button>
                 </p>
@@ -62,7 +73,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 SIMPUS-Mini &mdash; Jobsheet 3</p>
+        <p>&copy; 2026 SIMPUS-Mini &mdash; Jobsheet 4</p>
     </footer>
 </body>
 </html>
