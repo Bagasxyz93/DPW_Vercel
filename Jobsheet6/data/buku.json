@@ -1,12 +1,12 @@
 [
-    { "judul": "Laskar Pelangi", "pengarang": "Andrea Hirata", "tahun": 2005, "stok": 4 },
-    { "judul": "Bumi Manusia", "pengarang": "Pramoedya Ananta Toer", "tahun": 1980, "stok": 2 },
-    { "judul": "Negeri 5 Menara", "pengarang": "Ahmad Fuadi", "tahun": 2009, "stok": 0 },
-    { "judul": "Filosofi Teras", "pengarang": "Henry Manampiring", "tahun": 2018, "stok": 5 },
-    { "judul": "Ronggeng Dukuh Paruk", "pengarang": "Ahmad Tohari", "tahun": 1982, "stok": 1 },
-    { "judul": "Cantik Itu Luka", "pengarang": "Eka Kurniawan", "tahun": 2002, "stok": 3 },
-    { "judul": "Pulang", "pengarang": "Tere Liye", "tahun": 2015, "stok": 2 },
-    { "judul": "Sang Pemimpi", "pengarang": "Andrea Hirata", "tahun": 2006, "stok": 6 },
-    { "judul": "Perahu Kertas", "pengarang": "Dee Lestari", "tahun": 2009, "stok": 0 },
-    { "judul": "Gadis Kretek", "pengarang": "Ratih Kumala", "tahun": 2012, "stok": 4 }
+    { "judul": "1.", "pengarang": "Andrea Hirata", "tahun": 2005, "stok": "Malang" },
+    { "judul": "2.", "pengarang": "Pramoedya Ananta Toer", "tahun": 1980, "stok": "Surabaya" },
+    { "judul": "3.", "pengarang": "Ahmad Fuadi", "tahun": 2009, "stok": "Malang" },
+    { "judul": "4.", "pengarang": "Henry Manampiring", "tahun": 2018, "stok": "Semarang" },
+    { "judul": "5.", "pengarang": "Ahmad Tohari", "tahun": 1982, "stok": "Surabaya" },
+    { "judul": "6.", "pengarang": "Eka Kurniawan", "tahun": 2002, "stok": "Bandung" },
+    { "judul": "7.", "pengarang": "Tere Liye", "tahun": 2015, "stok": "Bandung" },
+    { "judul": "8.", "pengarang": "Andrea Hirata", "tahun": 2006, "stok": "Malang" },
+    { "judul": "9.", "pengarang": "Dee Lestari", "tahun": 2009, "stok": "Jakarta" },
+    { "judul": "10.", "pengarang": "Ratih Kumala", "tahun": 2012, "stok": "Jakarta" }
 ]

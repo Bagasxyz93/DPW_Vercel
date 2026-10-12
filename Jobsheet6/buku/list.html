@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SIMPUS-Mini | Daftar Buku</title>
+    <title>SIMPUS-Mini | Daftar Murid</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
     <header>
-    <h1><a href="../index.html">SIMPUS<span>-Mini</span></a></h1>
+    <h1><a href="../index.html">SI<span>-ABSEN</span></a></h1>
     <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Menu">&#9776;</button>
     <nav>
         <ul>
             <li><a href="../index.html">Beranda</a></li>
-            <li><a href="list.html" class="active">Daftar Buku</a></li>
-            <li><a href="tambah.html">Tambah Buku</a></li>
-            <li><a href="../anggota/list.html">Daftar Anggota</a></li>
-            <li><a href="../anggota/tambah.html">Tambah Anggota</a></li>
+            <li><a href="list.html" class="active">Daftar Murid</a></li>
+            <li><a href="tambah.html">Tambah Murid</a></li>
+            <li><a href="../anggota/list.html">Daftar Guru</a></li>
+            <li><a href="../anggota/tambah.html">Tambah Guru</a></li>
         </ul>
     </nav>
 </header>
@@ -24,11 +24,11 @@
     <main>
         <section>
             <div class="table-heading">
-                <h2>Daftar Buku</h2>
-                <a href="tambah.html" class="btn-tambah">+ Tambah Buku</a>
+                <h2>Daftar Murid</h2>
+                <a href="tambah.html" class="btn-tambah">+ Tambah Murid</a>
             </div>
             <div class="search-box">
-                <label for="search-input">Cari Judul Buku</label>
+                <label for="search-input">Cari Murid</label>
                 <input type="text" id="search-input" placeholder="Ketik judul buku...">
             </div>
             <p id="loading-indicator" style="display:none;">Memuat data...</p>
@@ -36,10 +36,10 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Judul</th>
-                            <th>Pengarang</th>
-                            <th>Tahun</th>
-                            <th>Stok</th>
+                            <th>No. Absen</th>
+                            <th>Nama</th>
+                            <th>NIS</th>
+                            <th>Alamat</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -52,7 +52,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 SIMPUS-Mini &mdash; Jobsheet 6</p>
+        <p>&copy; 2026 SI-ABSEN &mdash; Jobsheet 6</p>
     </footer>
     <script src="../assets/js/app.js"></script>
     <script src="../assets/js/buku.js"></script>
