@@ -48,6 +48,12 @@ $jobsheets = [
         'judul' => 'Jobsheet 8',
         'deskripsi' => 'Hasil pengerjaan Jobsheet 8.',
         'link' => 'Jobsheet8/index.php'
+    ],
+    [
+        'nomor' => '09',
+        'judul' => 'Jobsheet 9',
+        'deskripsi' => 'Implementasi pagination pada halaman data siswa, guru, dan program.',
+        'link' => 'Jobsheet9/index.php'
     ]
 ];
 
@@ -91,7 +97,6 @@ $jobsheets = [
 
     </header>
 
-
     <!-- CONTENT -->
     <main class="container">
 
@@ -109,7 +114,7 @@ $jobsheets = [
             <p>
                 Dokumentasi dan hasil pengerjaan Jobsheet
                 Desain & Pemrograman Web dari Jobsheet 1
-                hingga Jobsheet 8.
+                hingga Jobsheet 9.
             </p>
 
             <!-- BIODATA CARD -->
@@ -118,12 +123,16 @@ $jobsheets = [
                     <span class="bio-label">Nama</span>
                     <span class="bio-value">M. Bagas Fathurrahman</span>
                 </div>
+
                 <div class="bio-divider"></div>
+
                 <div class="bio-item">
                     <span class="bio-label">Kelas</span>
                     <span class="bio-value">TI-2D</span>
                 </div>
+
                 <div class="bio-divider"></div>
+
                 <div class="bio-item">
                     <span class="bio-label">NIM / Absen</span>
                     <span class="bio-value">254107020032 (Absen 17)</span>
@@ -131,7 +140,6 @@ $jobsheets = [
             </div>
 
         </section>
-
 
         <!-- DAFTAR JOBSHEET -->
         <section>
@@ -154,7 +162,6 @@ $jobsheets = [
 
             </div>
 
-
             <div class="jobsheet-grid">
 
                 <?php foreach ($jobsheets as $jobsheet): ?>
@@ -165,7 +172,6 @@ $jobsheets = [
                             <?php echo $jobsheet['nomor']; ?>
                         </div>
 
-
                         <div class="card-content">
 
                             <span class="card-label">
@@ -173,23 +179,34 @@ $jobsheets = [
                                 <?php echo $jobsheet['nomor']; ?>
                             </span>
 
-
                             <h4>
                                 <?php
-                                echo htmlspecialchars($jobsheet['judul']);
+                                echo htmlspecialchars(
+                                    $jobsheet['judul'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                );
                                 ?>
                             </h4>
 
-
                             <p>
                                 <?php
-                                echo htmlspecialchars($jobsheet['deskripsi']);
+                                echo htmlspecialchars(
+                                    $jobsheet['deskripsi'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                );
                                 ?>
                             </p>
 
-
                             <a
-                                href="<?php echo htmlspecialchars($jobsheet['link']); ?>"
+                                href="<?php
+                                    echo htmlspecialchars(
+                                        $jobsheet['link'],
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    );
+                                ?>"
                                 class="btn-open"
                             >
                                 Buka Jobsheet
@@ -207,7 +224,6 @@ $jobsheets = [
         </section>
 
     </main>
-
 
     <!-- FOOTER -->
     <footer class="footer">
