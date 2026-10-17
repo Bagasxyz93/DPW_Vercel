@@ -1,5 +1,8 @@
-
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $page_title = "Data Guru";
 
 require __DIR__ . '/../includes/koneksi.php';
@@ -105,9 +108,7 @@ include __DIR__ . '/../includes/header.php';
         </p>
     <?php endif; ?>
 
-    <!-- PENCARIAN SERVER-SIDE -->
     <form method="get" action="list.php" class="search-box">
-
         <label for="search-input">Cari Guru</label>
 
         <div class="search-controls">
@@ -124,12 +125,9 @@ include __DIR__ . '/../includes/header.php';
             </button>
 
             <?php if ($keyword !== ''): ?>
-                <a href="list.php" class="btn-edit">
-                    Reset
-                </a>
+                <a href="list.php" class="btn-edit">Reset</a>
             <?php endif; ?>
         </div>
-
     </form>
 
     <p class="pagination-info">
@@ -152,70 +150,41 @@ include __DIR__ . '/../includes/header.php';
 
             <tbody>
                 <?php if (empty($daftarGuru)): ?>
-
                     <tr>
                         <td colspan="6">
-                            <?php echo $keyword !== ''
+                            <?php
+                            echo $keyword !== ''
                                 ? 'Data guru tidak ditemukan.'
-                                : 'Belum ada data guru. Silakan tambahkan guru terlebih dahulu.'; ?>
+                                : 'Belum ada data guru. Silakan tambahkan guru terlebih dahulu.';
+                            ?>
                         </td>
                     </tr>
-
                 <?php else: ?>
-
                     <?php foreach ($daftarGuru as $index => $guru): ?>
                         <tr>
+                            <td><?php echo $offset + $index + 1; ?></td>
+
                             <td>
-                                <?php echo $offset + $index + 1; ?>
+                                <?php echo htmlspecialchars((string) ($guru['nip'] ?? '-'), ENT_QUOTES, 'UTF-8'); ?>
                             </td>
 
                             <td>
-                                <?php
-                                echo htmlspecialchars(
-                                    (string) ($guru['nip'] ?? '-'),
-                                    ENT_QUOTES,
-                                    'UTF-8'
-                                );
-                                ?>
+                                <?php echo htmlspecialchars($guru['nama'], ENT_QUOTES, 'UTF-8'); ?>
                             </td>
 
                             <td>
-                                <?php
-                                echo htmlspecialchars(
-                                    $guru['nama'],
-                                    ENT_QUOTES,
-                                    'UTF-8'
-                                );
-                                ?>
+                                <?php echo htmlspecialchars($guru['email'] ?? '-', ENT_QUOTES, 'UTF-8'); ?>
                             </td>
 
                             <td>
-                                <?php
-                                echo htmlspecialchars(
-                                    $guru['email'] ?? '-',
-                                    ENT_QUOTES,
-                                    'UTF-8'
-                                );
-                                ?>
-                            </td>
-
-                            <td>
-                                <?php
-                                echo htmlspecialchars(
-                                    $guru['no_hp'] ?? '-',
-                                    ENT_QUOTES,
-                                    'UTF-8'
-                                );
-                                ?>
+                                <?php echo htmlspecialchars($guru['no_hp'] ?? '-', ENT_QUOTES, 'UTF-8'); ?>
                             </td>
 
                             <td>
                                 <a
                                     href="edit.php?id=<?php echo (int) $guru['id']; ?>"
                                     class="btn-edit"
-                                >
-                                    Edit
-                                </a>
+                                >Edit</a>
 
                                 <form
                                     action="hapus.php"
@@ -228,34 +197,23 @@ include __DIR__ . '/../includes/header.php';
                                         value="<?php echo (int) $guru['id']; ?>"
                                     >
 
-                                    <button
-                                        type="submit"
-                                        class="btn-delete"
-                                    >
+                                    <button type="submit" class="btn-delete">
                                         Hapus
                                     </button>
                                 </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
-
                 <?php endif; ?>
             </tbody>
         </table>
     </div>
 
-    <!-- NAVIGASI PAGINATION -->
     <?php if ($totalData > 0 && $totalHalaman > 1): ?>
         <nav class="pagination" aria-label="Navigasi halaman">
 
             <?php if ($page > 1): ?>
-                <a href="<?php
-                    echo htmlspecialchars(
-                        urlHalamanGuru($page - 1, $keyword),
-                        ENT_QUOTES,
-                        'UTF-8'
-                    );
-                ?>">
+                <a href="<?php echo htmlspecialchars(urlHalamanGuru($page - 1, $keyword), ENT_QUOTES, 'UTF-8'); ?>">
                     &laquo; Sebelumnya
                 </a>
             <?php else: ?>
@@ -264,30 +222,16 @@ include __DIR__ . '/../includes/header.php';
 
             <?php for ($i = 1; $i <= $totalHalaman; $i++): ?>
                 <?php if ($i === $page): ?>
-                    <span class="active" aria-current="page">
-                        <?php echo $i; ?>
-                    </span>
+                    <span class="active" aria-current="page"><?php echo $i; ?></span>
                 <?php else: ?>
-                    <a href="<?php
-                        echo htmlspecialchars(
-                            urlHalamanGuru($i, $keyword),
-                            ENT_QUOTES,
-                            'UTF-8'
-                        );
-                    ?>">
+                    <a href="<?php echo htmlspecialchars(urlHalamanGuru($i, $keyword), ENT_QUOTES, 'UTF-8'); ?>">
                         <?php echo $i; ?>
                     </a>
                 <?php endif; ?>
             <?php endfor; ?>
 
             <?php if ($page < $totalHalaman): ?>
-                <a href="<?php
-                    echo htmlspecialchars(
-                        urlHalamanGuru($page + 1, $keyword),
-                        ENT_QUOTES,
-                        'UTF-8'
-                    );
-                ?>">
+                <a href="<?php echo htmlspecialchars(urlHalamanGuru($page + 1, $keyword), ENT_QUOTES, 'UTF-8'); ?>">
                     Berikutnya &raquo;
                 </a>
             <?php else: ?>

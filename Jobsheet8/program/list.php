@@ -1,5 +1,8 @@
-
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $page_title = "Data Program";
 
 require __DIR__ . '/../includes/koneksi.php';
@@ -95,9 +98,7 @@ include __DIR__ . '/../includes/header.php';
         </p>
     <?php endif; ?>
 
-    <!-- PENCARIAN SERVER-SIDE -->
     <form method="get" action="list.php" class="search-box">
-
         <label for="search-input">Cari Program</label>
 
         <div class="search-controls">
@@ -114,12 +115,9 @@ include __DIR__ . '/../includes/header.php';
             </button>
 
             <?php if ($keyword !== ''): ?>
-                <a href="list.php" class="btn-edit">
-                    Reset
-                </a>
+                <a href="list.php" class="btn-edit">Reset</a>
             <?php endif; ?>
         </div>
-
     </form>
 
     <p class="pagination-info">
@@ -141,51 +139,33 @@ include __DIR__ . '/../includes/header.php';
 
             <tbody>
                 <?php if (empty($daftarProgram)): ?>
-
                     <tr>
                         <td colspan="5">
-                            <?php echo $keyword !== ''
+                            <?php
+                            echo $keyword !== ''
                                 ? 'Program tidak ditemukan.'
-                                : 'Belum ada data program. Silakan tambahkan program terlebih dahulu.'; ?>
+                                : 'Belum ada data program. Silakan tambahkan program terlebih dahulu.';
+                            ?>
                         </td>
                     </tr>
-
                 <?php else: ?>
-
                     <?php foreach ($daftarProgram as $index => $program): ?>
                         <tr>
+                            <td><?php echo $offset + $index + 1; ?></td>
+
                             <td>
-                                <?php echo $offset + $index + 1; ?>
+                                <?php echo htmlspecialchars($program['nama_program'], ENT_QUOTES, 'UTF-8'); ?>
                             </td>
 
                             <td>
-                                <?php
-                                echo htmlspecialchars(
-                                    $program['nama_program'],
-                                    ENT_QUOTES,
-                                    'UTF-8'
-                                );
-                                ?>
-                            </td>
-
-                            <td>
-                                <?php
-                                echo htmlspecialchars(
-                                    $program['deskripsi'] ?? '-',
-                                    ENT_QUOTES,
-                                    'UTF-8'
-                                );
-                                ?>
+                                <?php echo htmlspecialchars($program['deskripsi'] ?? '-', ENT_QUOTES, 'UTF-8'); ?>
                             </td>
 
                             <td>
                                 <?php
                                 if (!empty($program['created_at'])) {
                                     echo htmlspecialchars(
-                                        date(
-                                            'd-m-Y',
-                                            strtotime($program['created_at'])
-                                        ),
+                                        date('d-m-Y', strtotime($program['created_at'])),
                                         ENT_QUOTES,
                                         'UTF-8'
                                     );
@@ -199,9 +179,7 @@ include __DIR__ . '/../includes/header.php';
                                 <a
                                     href="edit.php?id=<?php echo (int) $program['id']; ?>"
                                     class="btn-edit"
-                                >
-                                    Edit
-                                </a>
+                                >Edit</a>
 
                                 <form
                                     action="hapus.php"
@@ -214,34 +192,23 @@ include __DIR__ . '/../includes/header.php';
                                         value="<?php echo (int) $program['id']; ?>"
                                     >
 
-                                    <button
-                                        type="submit"
-                                        class="btn-delete"
-                                    >
+                                    <button type="submit" class="btn-delete">
                                         Hapus
                                     </button>
                                 </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
-
                 <?php endif; ?>
             </tbody>
         </table>
     </div>
 
-    <!-- NAVIGASI PAGINATION -->
     <?php if ($totalData > 0 && $totalHalaman > 1): ?>
         <nav class="pagination" aria-label="Navigasi halaman">
 
             <?php if ($page > 1): ?>
-                <a href="<?php
-                    echo htmlspecialchars(
-                        urlHalamanProgram($page - 1, $keyword),
-                        ENT_QUOTES,
-                        'UTF-8'
-                    );
-                ?>">
+                <a href="<?php echo htmlspecialchars(urlHalamanProgram($page - 1, $keyword), ENT_QUOTES, 'UTF-8'); ?>">
                     &laquo; Sebelumnya
                 </a>
             <?php else: ?>
@@ -250,30 +217,16 @@ include __DIR__ . '/../includes/header.php';
 
             <?php for ($i = 1; $i <= $totalHalaman; $i++): ?>
                 <?php if ($i === $page): ?>
-                    <span class="active" aria-current="page">
-                        <?php echo $i; ?>
-                    </span>
+                    <span class="active" aria-current="page"><?php echo $i; ?></span>
                 <?php else: ?>
-                    <a href="<?php
-                        echo htmlspecialchars(
-                            urlHalamanProgram($i, $keyword),
-                            ENT_QUOTES,
-                            'UTF-8'
-                        );
-                    ?>">
+                    <a href="<?php echo htmlspecialchars(urlHalamanProgram($i, $keyword), ENT_QUOTES, 'UTF-8'); ?>">
                         <?php echo $i; ?>
                     </a>
                 <?php endif; ?>
             <?php endfor; ?>
 
             <?php if ($page < $totalHalaman): ?>
-                <a href="<?php
-                    echo htmlspecialchars(
-                        urlHalamanProgram($page + 1, $keyword),
-                        ENT_QUOTES,
-                        'UTF-8'
-                    );
-                ?>">
+                <a href="<?php echo htmlspecialchars(urlHalamanProgram($page + 1, $keyword), ENT_QUOTES, 'UTF-8'); ?>">
                     Berikutnya &raquo;
                 </a>
             <?php else: ?>

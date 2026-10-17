@@ -1,26 +1,21 @@
-
 <?php
+// Mulai session sebelum mengakses $_SESSION.
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $page_title = "Data Siswa";
 
 require __DIR__ . '/../includes/koneksi.php';
 
-// =====================================================
 // FLASH MESSAGE
-// =====================================================
-
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 
-// =====================================================
 // PENCARIAN
-// =====================================================
-
 $keyword = trim($_GET['q'] ?? '');
 
-// =====================================================
 // PAGINATION
-// =====================================================
-
 $limit = 5;
 
 $page = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
@@ -28,10 +23,7 @@ $page = ($page !== false && $page !== null && $page > 0)
     ? $page
     : 1;
 
-// =====================================================
-// HITUNG TOTAL DATA SESUAI PENCARIAN
-// =====================================================
-
+// HITUNG TOTAL DATA
 $sqlCount = "
     SELECT COUNT(*)
     FROM siswa
@@ -49,16 +41,10 @@ $stmtCount->execute([
 $totalData = (int) $stmtCount->fetchColumn();
 
 $totalHalaman = max(1, (int) ceil($totalData / $limit));
-
-// Pastikan halaman tidak melebihi halaman terakhir
 $page = min($page, $totalHalaman);
-
 $offset = ($page - 1) * $limit;
 
-// =====================================================
 // AMBIL DATA SISWA
-// =====================================================
-
 $sqlSiswa = "
     SELECT
         siswa.id,
@@ -95,10 +81,7 @@ $stmtSiswa->execute();
 
 $daftarSiswa = $stmtSiswa->fetchAll(PDO::FETCH_ASSOC);
 
-// =====================================================
 // URL PAGINATION
-// =====================================================
-
 function urlHalamanSiswa($halaman, $keyword)
 {
     return '?' . http_build_query([
@@ -125,15 +108,23 @@ include __DIR__ . '/../includes/header.php';
 
     <?php if ($flash): ?>
         <p class="flash flash-<?php
-            echo htmlspecialchars($flash['type'], ENT_QUOTES, 'UTF-8');
+            echo htmlspecialchars(
+                $flash['type'],
+                ENT_QUOTES,
+                'UTF-8'
+            );
         ?>">
             <?php
-            echo htmlspecialchars($flash['pesan'], ENT_QUOTES, 'UTF-8');
+            echo htmlspecialchars(
+                $flash['pesan'],
+                ENT_QUOTES,
+                'UTF-8'
+            );
             ?>
         </p>
     <?php endif; ?>
 
-    <!-- PENCARIAN SERVER-SIDE -->
+    <!-- PENCARIAN -->
     <form method="get" action="list.php" class="search-box">
 
         <label for="search-input">Cari Siswa</label>
@@ -143,7 +134,13 @@ include __DIR__ . '/../includes/header.php';
                 type="search"
                 id="search-input"
                 name="q"
-                value="<?php echo htmlspecialchars($keyword, ENT_QUOTES, 'UTF-8'); ?>"
+                value="<?php
+                    echo htmlspecialchars(
+                        $keyword,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    );
+                ?>"
                 placeholder="Cari berdasarkan NIS atau nama..."
             >
 
@@ -162,7 +159,8 @@ include __DIR__ . '/../includes/header.php';
 
     <p class="pagination-info">
         Total <?php echo $totalData; ?> data siswa.
-        Halaman <?php echo $page; ?> dari <?php echo $totalHalaman; ?>.
+        Halaman <?php echo $page; ?> dari
+        <?php echo $totalHalaman; ?>.
     </p>
 
     <div class="table-responsive">
@@ -180,15 +178,15 @@ include __DIR__ . '/../includes/header.php';
 
             <tbody>
                 <?php if (empty($daftarSiswa)): ?>
-
                     <tr>
                         <td colspan="6">
-                            <?php echo $keyword !== ''
+                            <?php
+                            echo $keyword !== ''
                                 ? 'Data siswa tidak ditemukan.'
-                                : 'Belum ada data siswa. Silakan tambahkan siswa terlebih dahulu.'; ?>
+                                : 'Belum ada data siswa. Silakan tambahkan siswa terlebih dahulu.';
+                            ?>
                         </td>
                     </tr>
-
                 <?php else: ?>
 
                     <?php foreach ($daftarSiswa as $index => $siswa): ?>
@@ -272,7 +270,7 @@ include __DIR__ . '/../includes/header.php';
         </table>
     </div>
 
-    <!-- NAVIGASI PAGINATION -->
+    <!-- PAGINATION -->
     <?php if ($totalData > 0 && $totalHalaman > 1): ?>
         <nav class="pagination" aria-label="Navigasi halaman">
 
