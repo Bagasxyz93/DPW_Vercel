@@ -1,3 +1,4 @@
+
 /* =========================================================
    RESET & BASE
 ========================================================= */
@@ -504,6 +505,9 @@ tbody tr:last-child td {
     padding: 6px 11px;
     border-radius: 5px;
     font-size: 0.75rem;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
 }
 
 .btn-delete:hover {
@@ -666,11 +670,133 @@ footer {
 
 
 /* =========================================================
+   JOBSHEET 9: PAGINATION
+========================================================= */
+
+/* Informasi jumlah data dan posisi data */
+
+.pagination-info {
+    margin: 18px 0 12px;
+    color: #687788;
+    font-size: 0.82rem;
+}
+
+.pagination-info strong {
+    color: #26384a;
+}
+
+/* Baris kontrol jumlah data per halaman */
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 18px 0;
+}
+
+.pagination-limit {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: #526170;
+    font-size: 0.82rem;
+}
+
+.pagination-limit select {
+    padding: 8px 10px;
+    border: 1px solid #d5dce3;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #334155;
+    font-family: inherit;
+    font-size: 0.84rem;
+    cursor: pointer;
+}
+
+.pagination-limit select:focus {
+    outline: none;
+    border-color: #1d5b8a;
+}
+
+/* Navigasi halaman */
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 22px 0 8px;
+}
+
+.pagination a,
+.pagination span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    min-height: 36px;
+    padding: 7px 11px;
+    border: 1px solid #dce2e8;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #526170;
+    font-size: 0.82rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease;
+}
+
+.pagination a:hover {
+    background-color: #eaf3fa;
+    border-color: #1d5b8a;
+    color: #1d5b8a;
+}
+
+.pagination .active {
+    background-color: #1d5b8a;
+    border-color: #1d5b8a;
+    color: #fff;
+    font-weight: 600;
+}
+
+.pagination .disabled {
+    background-color: #f5f7fb;
+    color: #a0aab5;
+    cursor: not-allowed;
+}
+
+/* Form hapus yang menggunakan POST */
+
+.form-hapus {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.form-hapus button {
+    font-family: inherit;
+}
+
+/* Pesan ketika hasil pencarian kosong */
+
+.empty-state {
+    padding: 25px 15px;
+    text-align: center;
+    color: #8793a1;
+    font-size: 0.88rem;
+}
+
+
+/* =========================================================
    RESPONSIVE TABLET
 ========================================================= */
 
 @media (max-width: 1100px) {
-
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -678,7 +804,6 @@ footer {
     .dashboard-grid {
         grid-template-columns: 1fr;
     }
-
 }
 
 
@@ -687,7 +812,6 @@ footer {
 ========================================================= */
 
 @media (max-width: 768px) {
-
     .sidebar {
         width: 220px;
         transform: translateX(-100%);
@@ -728,6 +852,10 @@ footer {
         flex-direction: column;
     }
 
+    .pagination-controls {
+        align-items: flex-start;
+        flex-direction: column;
+    }
 }
 
 
@@ -736,7 +864,6 @@ footer {
 ========================================================= */
 
 @media (max-width: 480px) {
-
     .topbar {
         height: 65px;
     }
@@ -779,4 +906,19 @@ footer {
         font-size: 0.78rem;
     }
 
+    .pagination {
+        gap: 4px;
+    }
+
+    .pagination a,
+    .pagination span {
+        min-width: 32px;
+        min-height: 32px;
+        padding: 6px 8px;
+        font-size: 0.76rem;
+    }
+
+    .pagination-limit {
+        width: 100%;
+    }
 }

@@ -1,7 +1,10 @@
-<?php
-session_start();
 
-// Prefix relatif ke root proyek
+<?php
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
+// Root proyek SIABSEN
 $__jobsheetRoot = dirname(__DIR__);
 $__scriptDir = dirname($_SERVER['SCRIPT_FILENAME']);
 
@@ -14,16 +17,21 @@ $__rel = ltrim(
     '/'
 );
 
+// Menghitung prefix relatif menuju root proyek
 $base = $__rel === ''
     ? ''
     : str_repeat('../', substr_count($__rel, '/') + 1);
 
 $page_title = $page_title ?? 'Dashboard';
+$safePageTitle = htmlspecialchars(
+    $page_title,
+    ENT_QUOTES,
+    'UTF-8'
+);
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
 
@@ -32,9 +40,7 @@ $page_title = $page_title ?? 'Dashboard';
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        SIABSEN<?php echo $page_title ? ' | ' . htmlspecialchars($page_title) : ''; ?>
-    </title>
+    <title>SIABSEN | <?php echo $safePageTitle; ?></title>
 
     <link
         rel="stylesheet"
@@ -46,30 +52,22 @@ $page_title = $page_title ?? 'Dashboard';
 
 <div class="dashboard-layout">
 
-    <!-- =====================================================
-         SIDEBAR
-    ====================================================== -->
-
+    <!-- SIDEBAR -->
     <aside class="sidebar">
 
         <div class="sidebar-brand">
-            <h1>
-                SI<span>ABSEN</span>
-            </h1>
+            <h1>SI<span>ABSEN</span></h1>
         </div>
 
         <nav class="sidebar-menu">
 
-            <p class="sidebar-menu-title">
-                Menu Utama
-            </p>
+            <p class="sidebar-menu-title">Menu Utama</p>
 
             <ul>
-
                 <li>
                     <a
                         href="<?php echo $base; ?>index.php"
-                        class="<?php echo ($page_title === 'Dashboard') ? 'active' : ''; ?>"
+                        class="<?php echo $page_title === 'Dashboard' ? 'active' : ''; ?>"
                     >
                         <span class="menu-icon">⌂</span>
                         <span>Dashboard</span>
@@ -79,7 +77,7 @@ $page_title = $page_title ?? 'Dashboard';
                 <li>
                     <a
                         href="<?php echo $base; ?>siswa/list.php"
-                        class="<?php echo ($page_title === 'Data Siswa') ? 'active' : ''; ?>"
+                        class="<?php echo $page_title === 'Data Siswa' ? 'active' : ''; ?>"
                     >
                         <span class="menu-icon">👨‍🎓</span>
                         <span>Data Siswa</span>
@@ -89,7 +87,7 @@ $page_title = $page_title ?? 'Dashboard';
                 <li>
                     <a
                         href="<?php echo $base; ?>guru/list.php"
-                        class="<?php echo ($page_title === 'Data Guru') ? 'active' : ''; ?>"
+                        class="<?php echo $page_title === 'Data Guru' ? 'active' : ''; ?>"
                     >
                         <span class="menu-icon">👨‍🏫</span>
                         <span>Data Guru</span>
@@ -99,7 +97,7 @@ $page_title = $page_title ?? 'Dashboard';
                 <li>
                     <a
                         href="<?php echo $base; ?>program/list.php"
-                        class="<?php echo ($page_title === 'Data Program') ? 'active' : ''; ?>"
+                        class="<?php echo $page_title === 'Data Program' ? 'active' : ''; ?>"
                     >
                         <span class="menu-icon">▣</span>
                         <span>Program</span>
@@ -109,13 +107,12 @@ $page_title = $page_title ?? 'Dashboard';
                 <li>
                     <a
                         href="<?php echo $base; ?>absensi/list.php"
-                        class="<?php echo ($page_title === 'Data Absensi') ? 'active' : ''; ?>"
+                        class="<?php echo $page_title === 'Data Absensi' ? 'active' : ''; ?>"
                     >
                         <span class="menu-icon">✓</span>
                         <span>Absensi</span>
                     </a>
                 </li>
-
             </ul>
 
         </nav>
@@ -123,16 +120,10 @@ $page_title = $page_title ?? 'Dashboard';
     </aside>
 
 
-    <!-- =====================================================
-         AREA KONTEN
-    ====================================================== -->
-
+    <!-- AREA KONTEN -->
     <div class="main-content">
 
-        <!-- =================================================
-             TOPBAR
-        ================================================== -->
-
+        <!-- TOPBAR -->
         <header class="topbar">
 
             <div class="topbar-left">
@@ -142,16 +133,16 @@ $page_title = $page_title ?? 'Dashboard';
                     id="nav-toggle-btn"
                     class="nav-toggle-label"
                     aria-label="Buka menu"
+                    aria-expanded="false"
                 >
                     ☰
                 </button>
 
                 <h2 class="topbar-title">
-                    <?php echo htmlspecialchars($page_title); ?>
+                    <?php echo $safePageTitle; ?>
                 </h2>
 
             </div>
-
 
             <div class="topbar-right">
 
@@ -159,25 +150,19 @@ $page_title = $page_title ?? 'Dashboard';
                     <input
                         type="text"
                         placeholder="Cari..."
+                        aria-label="Pencarian umum"
                     >
                 </div>
 
                 <div class="profile">
 
-                    <div class="profile-avatar">
-                        A
-                    </div>
+                    <div class="profile-avatar">A</div>
 
                     <div class="profile-info">
-
-                        <span class="profile-name">
-                            Admin
-                        </span>
-
+                        <span class="profile-name">Admin</span>
                         <span class="profile-role">
                             Administrator
                         </span>
-
                     </div>
 
                 </div>
@@ -187,8 +172,5 @@ $page_title = $page_title ?? 'Dashboard';
         </header>
 
 
-        <!-- =================================================
-             KONTEN HALAMAN
-        ================================================== -->
-
+        <!-- KONTEN HALAMAN -->
         <main class="content">
