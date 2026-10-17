@@ -1,6 +1,6 @@
-
 <?php
-if (session_status() !== PHP_SESSION_ACTIVE) {
+// Mulai session sebelum mengirim output HTML.
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
@@ -22,7 +22,9 @@ $base = $__rel === ''
     ? ''
     : str_repeat('../', substr_count($__rel, '/') + 1);
 
+// Judul halaman
 $page_title = $page_title ?? 'Dashboard';
+
 $safePageTitle = htmlspecialchars(
     $page_title,
     ENT_QUOTES,
@@ -119,7 +121,6 @@ $safePageTitle = htmlspecialchars(
 
     </aside>
 
-
     <!-- AREA KONTEN -->
     <div class="main-content">
 
@@ -170,7 +171,6 @@ $safePageTitle = htmlspecialchars(
             </div>
 
         </header>
-
 
         <!-- KONTEN HALAMAN -->
         <main class="content">
