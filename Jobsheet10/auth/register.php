@@ -1,5 +1,5 @@
-
 <?php
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -10,32 +10,44 @@ if (isset($_SESSION['user_id'])) {
     exit;
 }
 
+// Ambil pesan error dari proses register.
 $error = $_SESSION['auth_error'] ?? '';
 unset($_SESSION['auth_error']);
+
 ?>
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Register | SIABSEN</title>
 
     <link rel="stylesheet" href="../assets/css/style.css">
     <script src="../assets/js/script.js" defer></script>
 </head>
+
 <body>
 
 <div class="login-page">
+
     <main class="login-container register-container">
 
         <!-- Panel identitas SIABSEN -->
+
         <section class="login-brand">
+
             <div class="login-brand-logo">
                 <h1>SI<span>ABSEN</span></h1>
             </div>
 
             <div class="login-brand-content">
+
                 <span class="login-eyebrow">
                     BERGABUNG DENGAN SIABSEN
                 </span>
@@ -47,29 +59,48 @@ unset($_SESSION['auth_error']);
                     sistem informasi absensi dengan mudah
                     dan terorganisir.
                 </p>
+
             </div>
 
             <p class="login-brand-footer">
-                © <?= date('Y') ?> SIABSEN. All rights reserved.
+                &copy; <?= date('Y') ?> SIABSEN. All rights reserved.
             </p>
+
         </section>
 
+
         <!-- Panel form register -->
+
         <section class="login-form-panel">
 
             <div class="login-heading">
+
                 <h2>Daftar Akun</h2>
+
                 <p>
                     Lengkapi informasi berikut untuk membuat
                     akun SIABSEN baru.
                 </p>
+
             </div>
 
+
+            <!-- Pesan error -->
+
             <?php if ($error !== ''): ?>
+
                 <div class="auth-message auth-error" role="alert">
-                    <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
+                    <?= htmlspecialchars(
+                        $error,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
                 </div>
+
             <?php endif; ?>
+
+
+            <!-- Form register -->
 
             <form
                 class="login-form"
@@ -77,11 +108,17 @@ unset($_SESSION['auth_error']);
                 action="proses_register.php"
                 method="post"
             >
+
                 <div class="form-group">
+
                     <label for="nama">Nama lengkap</label>
 
                     <div class="login-input-wrapper">
-                        <span class="login-input-icon" aria-hidden="true">
+
+                        <span
+                            class="login-input-icon"
+                            aria-hidden="true"
+                        >
                             👤
                         </span>
 
@@ -94,14 +131,22 @@ unset($_SESSION['auth_error']);
                             maxlength="255"
                             autocomplete="name"
                         >
+
                     </div>
+
                 </div>
 
+
                 <div class="form-group">
+
                     <label for="username">Username</label>
 
                     <div class="login-input-wrapper">
-                        <span class="login-input-icon" aria-hidden="true">
+
+                        <span
+                            class="login-input-icon"
+                            aria-hidden="true"
+                        >
                             @
                         </span>
 
@@ -117,14 +162,22 @@ unset($_SESSION['auth_error']);
                             title="Gunakan huruf, angka, titik, garis bawah, atau tanda hubung."
                             autocomplete="username"
                         >
+
                     </div>
+
                 </div>
 
+
                 <div class="form-group">
+
                     <label for="password">Password</label>
 
                     <div class="login-input-wrapper">
-                        <span class="login-input-icon" aria-hidden="true">
+
+                        <span
+                            class="login-input-icon"
+                            aria-hidden="true"
+                        >
                             🔒
                         </span>
 
@@ -147,16 +200,24 @@ unset($_SESSION['auth_error']);
                         >
                             Lihat
                         </button>
+
                     </div>
+
                 </div>
 
+
                 <div class="form-group">
+
                     <label for="konfirmasi_password">
                         Konfirmasi password
                     </label>
 
                     <div class="login-input-wrapper">
-                        <span class="login-input-icon" aria-hidden="true">
+
+                        <span
+                            class="login-input-icon"
+                            aria-hidden="true"
+                        >
                             🔒
                         </span>
 
@@ -179,23 +240,31 @@ unset($_SESSION['auth_error']);
                         >
                             Lihat
                         </button>
+
                     </div>
+
                 </div>
+
 
                 <button type="submit" class="btn-login">
                     Buat Akun
                 </button>
+
             </form>
+
 
             <p class="login-footer">
                 Sudah punya akun?
+
                 <a href="login.php" class="login-link">
                     Login sekarang
                 </a>
             </p>
 
         </section>
+
     </main>
+
 </div>
 
 </body>

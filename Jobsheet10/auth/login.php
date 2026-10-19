@@ -1,5 +1,5 @@
-
 <?php
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -10,34 +10,46 @@ if (isset($_SESSION['user_id'])) {
     exit;
 }
 
+// Ambil pesan dari proses login atau registrasi.
 $error = $_SESSION['auth_error'] ?? '';
 $success = $_SESSION['auth_success'] ?? '';
 
 unset($_SESSION['auth_error'], $_SESSION['auth_success']);
+
 ?>
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Login | SIABSEN</title>
 
     <link rel="stylesheet" href="../assets/css/style.css">
     <script src="../assets/js/script.js" defer></script>
 </head>
+
 <body>
 
 <div class="login-page">
+
     <main class="login-container">
 
         <!-- Panel identitas SIABSEN -->
+
         <section class="login-brand">
+
             <div class="login-brand-logo">
                 <h1>SI<span>ABSEN</span></h1>
             </div>
 
             <div class="login-brand-content">
+
                 <span class="login-eyebrow">
                     SISTEM INFORMASI ABSENSI
                 </span>
@@ -49,46 +61,80 @@ unset($_SESSION['auth_error'], $_SESSION['auth_success']);
                     data siswa, program, dan kehadiran secara
                     lebih praktis dan terorganisir.
                 </p>
+
             </div>
 
             <p class="login-brand-footer">
-                © <?= date('Y') ?> SIABSEN. All rights reserved.
+                &copy; <?= date('Y') ?> SIABSEN. All rights reserved.
             </p>
+
         </section>
 
+
         <!-- Panel form login -->
+
         <section class="login-form-panel">
 
             <div class="login-heading">
+
                 <h2>Selamat Datang!</h2>
+
                 <p>
                     Masukkan username dan password untuk
                     melanjutkan ke sistem.
                 </p>
+
             </div>
 
+
+            <!-- Pesan error -->
+
             <?php if ($error !== ''): ?>
+
                 <div class="auth-message auth-error" role="alert">
-                    <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
+                    <?= htmlspecialchars(
+                        $error,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
                 </div>
+
             <?php endif; ?>
 
+
+            <!-- Pesan sukses -->
+
             <?php if ($success !== ''): ?>
+
                 <div class="auth-message auth-success" role="status">
-                    <?= htmlspecialchars($success, ENT_QUOTES, 'UTF-8') ?>
+                    <?= htmlspecialchars(
+                        $success,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
                 </div>
+
             <?php endif; ?>
+
+
+            <!-- Form login -->
 
             <form
                 class="login-form"
                 action="proses_login.php"
                 method="post"
             >
+
                 <div class="form-group">
+
                     <label for="username">Username</label>
 
                     <div class="login-input-wrapper">
-                        <span class="login-input-icon" aria-hidden="true">
+
+                        <span
+                            class="login-input-icon"
+                            aria-hidden="true"
+                        >
                             👤
                         </span>
 
@@ -102,14 +148,22 @@ unset($_SESSION['auth_error'], $_SESSION['auth_success']);
                             autocomplete="username"
                             autofocus
                         >
+
                     </div>
+
                 </div>
 
+
                 <div class="form-group">
+
                     <label for="password">Password</label>
 
                     <div class="login-input-wrapper">
-                        <span class="login-input-icon" aria-hidden="true">
+
+                        <span
+                            class="login-input-icon"
+                            aria-hidden="true"
+                        >
                             🔒
                         </span>
 
@@ -131,23 +185,31 @@ unset($_SESSION['auth_error'], $_SESSION['auth_success']);
                         >
                             Lihat
                         </button>
+
                     </div>
+
                 </div>
+
 
                 <button type="submit" class="btn-login">
                     Masuk ke Sistem
                 </button>
+
             </form>
+
 
             <p class="login-footer">
                 Belum punya akun?
+
                 <a href="register.php" class="login-link">
                     Daftar sekarang
                 </a>
             </p>
 
         </section>
+
     </main>
+
 </div>
 
 </body>
