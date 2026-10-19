@@ -52,7 +52,7 @@ $jobsheets = [
     [
         'nomor' => '09',
         'judul' => 'Jobsheet 9',
-        'deskripsi' => 'Implementasi pagination pada halaman data siswa, guru, dan program.',
+        'deskripsi' => 'Hasil pengerjaan Jobsheet 9.',
         'link' => 'Jobsheet9/index.php'
     ]
 ];
