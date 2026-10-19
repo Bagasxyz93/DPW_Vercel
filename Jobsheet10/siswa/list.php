@@ -1,26 +1,51 @@
 
 <?php
+// =========================================================
+// AUTENTIKASI
+// Harus dijalankan sebelum output HTML apa pun.
+// =========================================================
+
 require_once __DIR__ . '/../includes/auth.php';
-require __DIR__ . '/../includes/koneksi.php';
 
-$page_title = "Data Siswa";
+// =========================================================
+// KONEKSI DATABASE
+// =========================================================
 
+require_once __DIR__ . '/../includes/koneksi.php';
+
+$page_title = 'Data Siswa';
+
+// =========================================================
 // FLASH MESSAGE
+// =========================================================
+
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 
+// =========================================================
 // PENCARIAN
+// =========================================================
+
 $keyword = trim($_GET['q'] ?? '');
 
+// =========================================================
 // PAGINATION
+// =========================================================
+
 $limit = 5;
 
-$page = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
-$page = ($page !== false && $page !== null && $page > 0)
-    ? $page
-    : 1;
+$pageInput = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
 
+$page = (
+    $pageInput !== false &&
+    $pageInput !== null &&
+    $pageInput > 0
+) ? $pageInput : 1;
+
+// =========================================================
 // HITUNG TOTAL DATA
+// =========================================================
+
 $sqlCount = "
     SELECT COUNT(*)
     FROM siswa
@@ -30,6 +55,7 @@ $sqlCount = "
 ";
 
 $stmtCount = $pdo->prepare($sqlCount);
+
 $stmtCount->execute([
     'keyword_nis' => '%' . $keyword . '%',
     'keyword_nama' => '%' . $keyword . '%',
@@ -37,11 +63,18 @@ $stmtCount->execute([
 
 $totalData = (int) $stmtCount->fetchColumn();
 
-$totalHalaman = max(1, (int) ceil($totalData / $limit));
+$totalHalaman = max(
+    1,
+    (int) ceil($totalData / $limit)
+);
+
 $page = min($page, $totalHalaman);
 $offset = ($page - 1) * $limit;
 
+// =========================================================
 // AMBIL DATA SISWA
+// =========================================================
+
 $sqlSiswa = "
     SELECT
         siswa.id,
@@ -66,19 +99,33 @@ $stmtSiswa->bindValue(
     '%' . $keyword . '%',
     PDO::PARAM_STR
 );
+
 $stmtSiswa->bindValue(
     ':keyword_nama',
     '%' . $keyword . '%',
     PDO::PARAM_STR
 );
-$stmtSiswa->bindValue(':limit', $limit, PDO::PARAM_INT);
-$stmtSiswa->bindValue(':offset', $offset, PDO::PARAM_INT);
+
+$stmtSiswa->bindValue(
+    ':limit',
+    $limit,
+    PDO::PARAM_INT
+);
+
+$stmtSiswa->bindValue(
+    ':offset',
+    $offset,
+    PDO::PARAM_INT
+);
 
 $stmtSiswa->execute();
 
 $daftarSiswa = $stmtSiswa->fetchAll(PDO::FETCH_ASSOC);
 
-// URL PAGINATION
+// =========================================================
+// FUNGSI URL PAGINATION
+// =========================================================
+
 function urlHalamanSiswa($halaman, $keyword)
 {
     return '?' . http_build_query([
@@ -86,6 +133,10 @@ function urlHalamanSiswa($halaman, $keyword)
         'page' => $halaman,
     ]);
 }
+
+// =========================================================
+// HEADER
+// =========================================================
 
 require __DIR__ . '/../includes/header.php';
 ?>
@@ -103,26 +154,44 @@ require __DIR__ . '/../includes/header.php';
         </a>
     </div>
 
+    <!-- FLASH MESSAGE -->
+
     <?php if ($flash): ?>
         <p class="flash flash-<?php
-            echo htmlspecialchars($flash['type'], ENT_QUOTES, 'UTF-8');
+            echo htmlspecialchars(
+                $flash['type'] ?? 'success',
+                ENT_QUOTES,
+                'UTF-8'
+            );
         ?>">
             <?php
-            echo htmlspecialchars($flash['pesan'], ENT_QUOTES, 'UTF-8');
+            echo htmlspecialchars(
+                $flash['pesan'] ?? '',
+                ENT_QUOTES,
+                'UTF-8'
+            );
             ?>
         </p>
     <?php endif; ?>
 
+    <!-- PENCARIAN -->
+
     <form method="get" action="list.php" class="search-box">
+
         <label for="search-input">Cari Siswa</label>
 
         <div class="search-controls">
+
             <input
                 type="search"
                 id="search-input"
                 name="q"
                 value="<?php
-                    echo htmlspecialchars($keyword, ENT_QUOTES, 'UTF-8');
+                    echo htmlspecialchars(
+                        $keyword,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    );
                 ?>"
                 placeholder="Cari berdasarkan NIS atau nama..."
             >
@@ -134,16 +203,23 @@ require __DIR__ . '/../includes/header.php';
             <?php if ($keyword !== ''): ?>
                 <a href="list.php" class="btn-edit">Reset</a>
             <?php endif; ?>
+
         </div>
     </form>
+
+    <!-- INFORMASI PAGINATION -->
 
     <p class="pagination-info">
         Total <?php echo $totalData; ?> data siswa.
         Halaman <?php echo $page; ?> dari <?php echo $totalHalaman; ?>.
     </p>
 
+    <!-- TABEL DATA SISWA -->
+
     <div class="table-responsive">
+
         <table>
+
             <thead>
                 <tr>
                     <th>No</th>
@@ -156,9 +232,11 @@ require __DIR__ . '/../includes/header.php';
             </thead>
 
             <tbody>
+
                 <?php if (empty($daftarSiswa)): ?>
+
                     <tr>
-                        <td colspan="6">
+                        <td colspan="6" class="empty-state">
                             <?php
                             echo $keyword !== ''
                                 ? 'Data siswa tidak ditemukan.'
@@ -166,10 +244,16 @@ require __DIR__ . '/../includes/header.php';
                             ?>
                         </td>
                     </tr>
+
                 <?php else: ?>
+
                     <?php foreach ($daftarSiswa as $index => $siswa): ?>
+
                         <tr>
-                            <td><?php echo $offset + $index + 1; ?></td>
+
+                            <td>
+                                <?php echo $offset + $index + 1; ?>
+                            </td>
 
                             <td>
                                 <?php
@@ -184,7 +268,7 @@ require __DIR__ . '/../includes/header.php';
                             <td>
                                 <?php
                                 echo htmlspecialchars(
-                                    $siswa['nama'],
+                                    $siswa['nama'] ?? '',
                                     ENT_QUOTES,
                                     'UTF-8'
                                 );
@@ -194,7 +278,7 @@ require __DIR__ . '/../includes/header.php';
                             <td>
                                 <?php
                                 echo htmlspecialchars(
-                                    $siswa['jenis_kelamin'],
+                                    $siswa['jenis_kelamin'] ?? '-',
                                     ENT_QUOTES,
                                     'UTF-8'
                                 );
@@ -212,10 +296,15 @@ require __DIR__ . '/../includes/header.php';
                             </td>
 
                             <td>
+
                                 <a
-                                    href="edit.php?id=<?php echo (int) $siswa['id']; ?>"
+                                    href="edit.php?id=<?php
+                                        echo (int) $siswa['id'];
+                                    ?>"
                                     class="btn-edit"
-                                >Edit</a>
+                                >
+                                    Edit
+                                </a>
 
                                 <form
                                     action="hapus.php"
@@ -223,28 +312,49 @@ require __DIR__ . '/../includes/header.php';
                                     class="form-hapus"
                                     onsubmit="return confirm('Yakin ingin menghapus data siswa ini?');"
                                 >
+
                                     <input
                                         type="hidden"
                                         name="id"
-                                        value="<?php echo (int) $siswa['id']; ?>"
+                                        value="<?php
+                                            echo (int) $siswa['id'];
+                                        ?>"
                                     >
 
-                                    <button type="submit" class="btn-delete">
+                                    <button
+                                        type="submit"
+                                        class="btn-delete"
+                                    >
                                         Hapus
                                     </button>
+
                                 </form>
+
                             </td>
+
                         </tr>
+
                     <?php endforeach; ?>
+
                 <?php endif; ?>
+
             </tbody>
+
         </table>
+
     </div>
 
+    <!-- NAVIGASI PAGINATION -->
+
     <?php if ($totalData > 0 && $totalHalaman > 1): ?>
-        <nav class="pagination" aria-label="Navigasi halaman">
+
+        <nav
+            class="pagination"
+            aria-label="Navigasi halaman"
+        >
 
             <?php if ($page > 1): ?>
+
                 <a href="<?php
                     echo htmlspecialchars(
                         urlHalamanSiswa($page - 1, $keyword),
@@ -254,16 +364,28 @@ require __DIR__ . '/../includes/header.php';
                 ?>">
                     &laquo; Sebelumnya
                 </a>
+
             <?php else: ?>
-                <span class="disabled">&laquo; Sebelumnya</span>
+
+                <span class="disabled">
+                    &laquo; Sebelumnya
+                </span>
+
             <?php endif; ?>
 
             <?php for ($i = 1; $i <= $totalHalaman; $i++): ?>
+
                 <?php if ($i === $page): ?>
-                    <span class="active" aria-current="page">
+
+                    <span
+                        class="active"
+                        aria-current="page"
+                    >
                         <?php echo $i; ?>
                     </span>
+
                 <?php else: ?>
+
                     <a href="<?php
                         echo htmlspecialchars(
                             urlHalamanSiswa($i, $keyword),
@@ -273,10 +395,13 @@ require __DIR__ . '/../includes/header.php';
                     ?>">
                         <?php echo $i; ?>
                     </a>
+
                 <?php endif; ?>
+
             <?php endfor; ?>
 
             <?php if ($page < $totalHalaman): ?>
+
                 <a href="<?php
                     echo htmlspecialchars(
                         urlHalamanSiswa($page + 1, $keyword),
@@ -286,13 +411,21 @@ require __DIR__ . '/../includes/header.php';
                 ?>">
                     Berikutnya &raquo;
                 </a>
+
             <?php else: ?>
-                <span class="disabled">Berikutnya &raquo;</span>
+
+                <span class="disabled">
+                    Berikutnya &raquo;
+                </span>
+
             <?php endif; ?>
 
         </nav>
+
     <?php endif; ?>
 
 </section>
 
-<?php require __DIR__ . '/../includes/footer.php'; ?>
+<?php
+require __DIR__ . '/../includes/footer.php';
+?>
