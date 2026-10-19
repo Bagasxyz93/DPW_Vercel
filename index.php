@@ -54,6 +54,12 @@ $jobsheets = [
         'judul' => 'Jobsheet 9',
         'deskripsi' => 'Hasil pengerjaan Jobsheet 9.',
         'link' => 'Jobsheet9/index.php'
+    ],
+    [
+        'nomor' => '10',
+        'judul' => 'Jobsheet 10',
+        'deskripsi' => 'Hasil pengerjaan Jobsheet 10.',
+        'link' => 'Jobsheet10/index.php'
     ]
 ];
 
